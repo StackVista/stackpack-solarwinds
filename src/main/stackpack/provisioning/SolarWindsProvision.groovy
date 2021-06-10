@@ -10,18 +10,20 @@ class SolarWindsProvision extends ProvisioningScript {
   }
 
   def INTEGRATION_TYPE = "solarwinds"
-  def INTEGRATION_URL = "tutorial://tutorial-1"
 
   @Override
   ProvisioningIO<scala.Unit> install(Map<String, Object> config) {
     def templateArguments = [
-      'topicName': topicName(),
+      'topicName': topicName(config),
+      "instanceId": context().instance().id(),
       'integrationType': INTEGRATION_TYPE,
-      'integrationUrl': INTEGRATION_URL
+      'integrationUrl': config.solarwinds_integration_url,
+      'instanceName': config.solarwinds_instance_name
     ]
     templateArguments.putAll(config)
 
-    return context().stackPack().importSnapshot("templates/solarwinds-template.stj", templateArguments)
+    return context().stackPack().importSnapshot("templates/solarwinds.stj", templateArguments) >>
+           context().instance().importSnapshot("templates/solarwinds-instance-template.stj", templateArguments)
   }
 
   @Override
@@ -31,14 +33,14 @@ class SolarWindsProvision extends ProvisioningScript {
 
   @Override
   void waitingForData(Map<String, Object> config) {
-    context().sts().onDataReceived(topicName(), {
+    context().sts().onDataReceived(topicName(config), {
       context().sts().provisioningComplete()
     })
   }
 
-  private def topicName() {
-  def type = INTEGRATION_TYPE
-    def url = INTEGRATION_URL
+  private def topicName(Map<String, Object> config) {
+    def type = INTEGRATION_TYPE
+    def url = config.solarwinds_instance_url
     return context().sts().createTopologyTopicName(type, url)
   }
 }

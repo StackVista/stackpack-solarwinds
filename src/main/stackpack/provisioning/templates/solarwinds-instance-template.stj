@@ -1,0 +1,70 @@
+{
+  "nodes": [
+    {
+      "_type": "DataSource",
+      "config": {
+        "_type": "Sts.StsTopologyDataSourceConfig",
+        "autoExpireElements": false,
+        "expireElementsAfter": 172800000,
+        "id": -2,
+        "integrationType": "solarwinds",
+        "supportedDataTypes": [
+          "TOPOLOGY_ELEMENTS"
+        ],
+        "supportedWindowingMethods": [],
+        "topic": "{{topicName}}"
+      },
+      "description": "DataSource for SolarWinds topology elements",
+      "extTopology": {
+        "_type": "ExtTopology",
+        "dataSource": -1,
+        "id": -3,
+        "settings": {
+          "_type": "TopologySyncSettings",
+          "cleanupExpiredElements": false,
+          "cleanupInterval": 3600000,
+          "id": -4,
+          "maxBatchSize": 200,
+          "maxBatchesPerSecond": 5
+        }
+      },
+      "id": -1,
+      "identifier": "urn:stackpack:solarwinds:instance:{{instanceId}}:data-source:solarwinds",
+      "name": "SolarWinds - {{instanceName}}",
+      "pluginId": "Sts",
+      "uiRequestTimeout": 15000
+    },
+    {
+      "_type": "Sync",
+      "componentActions": [],
+      "defaultComponentAction": {
+        "_type": "SyncActionCreateComponent",
+        "id": -15,
+        "mergeStrategy": "MergePreferTheirs",
+        "templateFunction": {{ get "urn:stackpack:solarwinds:shared:component-template-function:solarwinds-component-template" }},
+        "type": "default_component_mapping"
+      },
+      "defaultRelationAction": {
+        "_type": "SyncActionCreateRelation",
+        "id": -16,
+        "mergeStrategy": "MergePreferTheirs",
+        "templateFunction": {{ get "urn:stackpack:solarwinds:shared:relation-template-function:solarwinds-relation-template" }},
+        "type": "default_relation_mapping"
+      },
+      "extTopology": -3,
+      "id": -13,
+      "identifier": "urn:stackpack:solarwinds:instance:{{instanceId}}:sync:solarwinds",
+      "name": "SolarWinds - {{instanceName}}",
+      "relationActions": [],
+      "topologyDataQuery": {
+        "_type": "Sts.StsTopologyElementsQuery",
+        "componentIdExtractorFunction": {{ get "urn:stackpack:solarwinds:shared:id-extractor-function:solarwinds-component-id-extractor" }},
+        "consumerOffsetStartAtEarliest": false,
+        "id": -14,
+        "relationIdExtractorFunction": {{ get "urn:stackpack:solarwinds:shared:id-extractor-function:solarwinds-relation-id-extractor" }}
+      }
+    }
+  ],
+  "timestamp": "2019-11-27T15:29:42Z",
+  "version": "0.1"
+}

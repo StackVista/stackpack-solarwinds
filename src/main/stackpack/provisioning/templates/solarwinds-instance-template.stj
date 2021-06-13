@@ -35,11 +35,30 @@
       "uiRequestTimeout": 15000
     },
     {
+      "_type": "ComponentMappingFunction",
+      "id": -14,
+      "identifier": "urn:stackpack:solarwinds:instance:{{instanceId}}:component-mapping-function:solarwinds-component-mapping-function",
+      "name": "SolarWinds Component Mapping function - {{instanceName}}",
+      "parameters": [
+        {
+          "_type": "Parameter",
+          "id": -15,
+          "multiple": false,
+          "name": "element",
+          "required": true,
+          "system": true,
+          "type": "STRUCT_TYPE"
+        }
+      ],
+      "script": "{{ include "./scripts/SolarWinds component mapping function - instanceName.groovy" }}"
+    },
+    {
       "_type": "Sync",
       "componentActions": [],
       "defaultComponentAction": {
         "_type": "SyncActionCreateComponent",
         "id": -6,
+        "mappingFunction": -14,
         "mergeStrategy": "MergePreferTheirs",
         "templateFunction": {{ get "urn:stackpack:solarwinds:shared:component-template-function:solarwinds-component-template" }},
         "type": "default_component_mapping"

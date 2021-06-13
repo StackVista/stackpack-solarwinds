@@ -84,14 +84,14 @@
     },
     {
       "_type": "ComponentType",
-      "iconbase64": "{{ include "./icons/lan.png" "base64" }}",
+      "iconbase64": "{{ include "./icons/router.png" "base64" }}",
       "id": -10,
       "identifier": "urn:stackpack:solarwinds:shared:component-type:host",
       "name": "host"
     },
     {
       "_type": "ComponentType",
-      "iconbase64": "{{ include "./icons/router.png" "base64" }}",
+      "iconbase64": "{{ include "./icons/lan.png" "base64" }}",
       "id": -11,
       "identifier": "urn:stackpack:solarwinds:shared:component-type:interface",
       "name": "interface"

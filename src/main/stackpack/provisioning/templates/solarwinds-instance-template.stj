@@ -39,20 +39,20 @@
       "componentActions": [],
       "defaultComponentAction": {
         "_type": "SyncActionCreateComponent",
-        "id": -15,
+        "id": -6,
         "mergeStrategy": "MergePreferTheirs",
         "templateFunction": {{ get "urn:stackpack:solarwinds:shared:component-template-function:solarwinds-component-template" }},
         "type": "default_component_mapping"
       },
       "defaultRelationAction": {
         "_type": "SyncActionCreateRelation",
-        "id": -16,
+        "id": -7,
         "mergeStrategy": "MergePreferTheirs",
         "templateFunction": {{ get "urn:stackpack:solarwinds:shared:relation-template-function:solarwinds-relation-template" }},
         "type": "default_relation_mapping"
       },
       "extTopology": -3,
-      "id": -13,
+      "id": -8,
       "identifier": "urn:stackpack:solarwinds:instance:{{instanceId}}:sync:solarwinds",
       "name": "SolarWinds - {{instanceName}}",
       "relationActions": [],
@@ -60,8 +60,42 @@
         "_type": "Sts.StsTopologyElementsQuery",
         "componentIdExtractorFunction": {{ get "urn:stackpack:solarwinds:shared:id-extractor-function:solarwinds-component-id-extractor" }},
         "consumerOffsetStartAtEarliest": false,
-        "id": -14,
+        "id": -9,
         "relationIdExtractorFunction": {{ get "urn:stackpack:solarwinds:shared:id-extractor-function:solarwinds-relation-id-extractor" }}
+      }
+    },
+    {
+      "_type": "QueryView",
+      "groupedByDomains": true,
+      "groupedByLayers": true,
+      "groupingEnabled": true,
+      "autoGrouping": true,
+      "id": -10,
+      "identifier": "urn:stackpack:solarwinds:instance:{{instanceId}}:query-view:solarwinds",
+      "minimumGroupSize": 8,
+      "name": "SolarWinds - {{instanceName}}",
+      "query": "label IN (\"stackpack:solarwinds\")",
+      "queryVersion": "0.0.1",
+      "showIndirectRelations": false,
+      "viewHealthStateConfiguration": {
+        "_type": "ViewHealthStateConfiguration",
+        "arguments": [
+          {
+            "_type": "ArgumentLongVal",
+            "id": -12,
+            "parameter": {{ get "urn:stackpack:common:view-health-state-configuration-function:minimum-health-states" "Type=Parameter;Name=minCriticalHealthStates" }},
+            "value": 1
+          },
+          {
+            "_type": "ArgumentLongVal",
+            "id": -13,
+            "parameter": {{ get "urn:stackpack:common:view-health-state-configuration-function:minimum-health-states" "Type=Parameter;Name=minDeviatingHealthStates" }},
+            "value": 1
+          }
+        ],
+        "enabled": true,
+        "function": {{ get "urn:stackpack:common:view-health-state-configuration-function:minimum-health-states" }},
+        "id": -11
       }
     }
   ],

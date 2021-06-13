@@ -51,11 +51,13 @@
     \{{#if element.data.description\}}
     "description": "\{{ element.data.description \}}",
     \{{/if\}}
-    "type" : \{{ resolveOrCreate "ComponentType" element.type.name "Tutorial Component" \}},
+    "type" : \{{ getOrCreate (identifier "urn:stackpack:solarwinds:shared" "ComponentType" element.type.name ) (identifier "urn:system:auto" "ComponentType" element.type.name) (concat "Type=ComponentType;Name=" element.type.name) \}},
     "version": "\{{ element.data.version \}}",
-    "layer": \{{ resolveOrCreate "Layer" element.data.layer "Tutorial Components" \}},
-    "domain": \{{ resolveOrCreate "Domain" element.data.domain "Tutorial Domain" \}},
+    "layer": \{{ getOrCreate (identifier "urn:stackpack:common" "Layer" element.data.layer) (identifier "urn:system:auto" "Layer" element.data.layer) (concat "Type=Layer;Name=" element.data.layer) \}},
+    "domain": \{{ getOrCreate (identifier "urn:stackpack:solarwinds:shared" "Domain" element.data.domain ) (identifier "urn:system:auto" "Domain" element.data.domain) (concat "Type=Domain;Name=" element.data.domain) \}},
     "environments": [
-        \{{ resolveOrCreate "Environment" element.data.environment "Tutorial Environment" \}}
+        \{{# join element.data.environments "," \}}
+            \{{ getOrCreate (identifier "urn:stackpack:common" "Environment" this) (identifier "urn:system:auto" "Environment" this) (concat "Type=Environment;Name=" this) \}}
+        \{{/ join \}}
     ]
 }

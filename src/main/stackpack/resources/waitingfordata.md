@@ -1,61 +1,44 @@
-## The Tutorial StackPack is waiting for your action, please send some topology to StackState
+## The SolarWinds StackPack is waiting for your action, please send some topology to StackState
 
 The StackPack has been installed.
 
 Now, you can push data to this StackPack to check if it works.
 
-## Push data using an agent check
+### Configure
 
-Check out the [push-integration tutorial](https://docs.stackstate.com/develop/tutorials/push_integration_tutorial) for instructions on how to push data to this StackPack.
+To enable the SolarWinds check and begin collecting data from SolarWinds, add the following configuration to StackState Agent V2:
 
-Beware that the instance type and URL are different than the one used in the tutorial:
+1.  Edit the Agent integration configuration file `/etc/stackstate-agent/conf.d/solarwinds.d/conf.yaml` to include details of your SolarWinds instance:
+    * **url** - the REST API URL, uses HTTPS protocol for communication.
+    * **user** - a SolarWinds user with access to the required SolarWinds API endpoints.
+    * **password** - use agent secrets management to store passwords outside the configuration file.
 
+    ```text
+    init_config:
+
+    instances:
+      - url: <instance_name.solarwinds.localdomain>
+        instance_type: solarwinds
+        source_identifier: 'urn:solarwinds:'
+        min_collection_interval: 30
+        username: <instance_username>
+        password: <instance_password>
+        solarwinds_domain: <instance_domain>
+        solarwinds_domain_values:
+          - <instance_domain_value_1>
+          - <instance_domain_value_2>
+          - <instance_domain_value_n>
+     ```
+2. Set the following filters:
+    - **solarwinds_domain** - The name of a SolarWinds custom property that will be used to select nodes from SolarWinds to include in the StackState dataset.
+    - **solarwinds_domain_values** - A list of values used by the specified `solarwinds_domain` to select the correct nodes for inclusion. Any node in SolarWinds that has one of these values set will be included in the data collection. Each value in this list will be represented as a separate domain in StackState.
+3. Restart the StackState Agent(s) to apply the configuration changes.
+4. Once the Agent has restarted, wait for data to be collected from SolarWinds and sent to StackState.
+
+### Status
+
+To check the status of the SolarWinds integration, run the status subcommand and look for SolarWinds under `Running Checks`:
+
+```text
+sudo stackstate-agent status
 ```
-Instance type (source identifier): tutorial
-Instance URL: tutorial://tutorial-1
-```
-
-The `example.py` check in the [push-integration tutorial repository](https://github.com/StackVista/push-integration-tutorial) must be changed with the above parameters.
-
-## Push data using `curl`
-
-1. Save a file named `topology.json` with the following content
-
-```json
-{
-   "apiKey":"{{config.apiKey}}",
-   "collection_timestamp":1467037580.595086,
-   "internalHostname":"lnx-343242.srv.stackstate.com",
-   "topologies":[
-      {
-         "start_snapshot": false,
-         "stop_snapshot": false,
-         "instance":{
-            "type":"tutorial",
-            "url":"tutorial://tutorial-1"
-         },
-         "components":[
-            {
-               "externalId":"myDummyApp",
-               "type":{
-                  "name":"application"
-               },
-               "data":{
-                  "ip_addresses":["172.17.0.8"],
-                  "labels":["label1", "category:label2"]
-               }
-            }
-         ],
-         "relations":[]
-      }
-   ]
-}
-```
-
-2. Run this curl command to push the data to StackState:
-
-``` bash
-curl -v user:password -X POST -H "Content-Type: application/json" --data-ascii @topology.json "{{config.baseUrl}}/stsAgent/intake/?api_key={{config.apiKey}}"
-```
-
-The [StackPack tutorial](https://docs.stackstate.com/develop/tutorials) on the StackState documentation site explains how to use it.

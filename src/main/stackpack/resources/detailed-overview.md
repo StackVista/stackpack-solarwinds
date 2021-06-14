@@ -1,4 +1,4 @@
-## Pre-requisites
+## Prerequisites
 
 To set up the SolarWinds integration you will need to have:
 
@@ -12,7 +12,7 @@ To set up the SolarWinds integration you will need to have:
 
 The SolarWinds user configured in the StackState Agent V2 must have read access to the SolarWinds API (default for all user accounts). No additional authorization needs to be set for this account in the SolarWinds system.
 
-Refer to the SolarWinds product documentation for details on how to [Manage Orion Web Console user accounts in the Orion Platform \(documentation.solarwinds.com\)](https://documentation.solarwinds.com/en/success_center/orionplatform/content/core-managing-web-accounts-sw1724.htm).
+Refer to the SolarWinds product documentation for details on how to [Manage Orion Web Console user accounts in the Orion Platform \(documentation.solarwinds.com\)](https://l.stackstate.com/solarwinds-manage-user-accounts-in-orion).
 
 ### Data retrieved
 

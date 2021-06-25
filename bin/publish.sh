@@ -42,7 +42,7 @@ function exitOnError {
 if [ "$#" -ne 1 ]; then
     echo "Expected 1 argument:"
     echo "  publish.sh <publish_version>"
-    exit -1
+    exit 1
 fi
 
 stackpack=$PWD
@@ -51,9 +51,9 @@ publish_version=$1
 version_file="${stackpack}/version.sbt"
 
 comment "*******************************************************************"
-comment "This script will create a new release for the stackpack-autosync from master."
+comment "This script will create a new release for the stackpack-autosync from main."
 comment "Attention!!!"
-comment "Attention!!! Your local master will be replaced with the latest origin master."
+comment "Attention!!! Your local main will be replaced with the latest origin main."
 comment "Attention!!!"
 comment "*******************************************************************"
 
@@ -76,12 +76,12 @@ comment "Fetching changes"
 git fetch --all
 exitOnError
 
-comment "Checking out master"
-git checkout master
+comment "Checking out main"
+git checkout main
 exitOnError
 
-comment "Resetting master"
-git reset --hard origin/master
+comment "Resetting main"
+git reset --hard origin/main
 exitOnError
 
 comment "Bump to version $publish_version"
@@ -119,8 +119,8 @@ git tag "$tag_name"
 exitOnError
 comment "Tag $tag_name created"
 
-comment "Push changes to master"
-git push origin master
+comment "Push changes to main"
+git push origin main
 exitOnError
 
 git push origin "$tag_name"

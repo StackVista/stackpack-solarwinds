@@ -102,6 +102,15 @@
       "id": -12,
       "identifier": "urn:stackpack:solarwinds:shared:component-type:network_host",
       "name": "network host"
+    },
+    {
+      "_type": "ComponentActionDefinition",
+      "bindQuery": "label = \"stackpack:solarwinds\"",
+      "description": "Redirects to SolarWinds UI",
+      "id": -45,
+      "identifier": "urn:stackpack:solarwinds:shared:component-action-definition:go-to-solarwinds",
+      "name": "Go to SolarWinds",
+      "script": "{{ include "./scripts/Go to Solarwinds.groovy" }}"
     }
   ],
   "timestamp": "2019-11-27T15:29:42Z",

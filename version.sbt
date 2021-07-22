@@ -1,2 +1,2 @@
-lastReleasedStackPackVersion := "0.0.5"
+lastReleasedStackPackVersion := "1.0.0"
 minSupportedStackStateVersion:= "4.3.0"

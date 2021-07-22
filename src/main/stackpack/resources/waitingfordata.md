@@ -18,9 +18,6 @@ To enable the SolarWinds check and begin collecting data from SolarWinds, add th
 
     instances:
       - url: <instance_name.solarwinds.localdomain>
-        instance_type: solarwinds
-        source_identifier: 'urn:solarwinds:'
-        min_collection_interval: 30
         username: <instance_username>
         password: <instance_password>
         solarwinds_domain: <instance_domain>
@@ -28,6 +25,7 @@ To enable the SolarWinds check and begin collecting data from SolarWinds, add th
           - <instance_domain_value_1>
           - <instance_domain_value_2>
           - <instance_domain_value_n>
+        min_collection_interval: 30
      ```
 2. Set the following filters:
     - **solarwinds_domain** - The name of a SolarWinds custom property that will be used to select nodes from SolarWinds to include in the StackState dataset.

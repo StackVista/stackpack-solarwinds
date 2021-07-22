@@ -41,6 +41,7 @@ The SolarWinds check retrieves the following topology data from SolarWinds:
 | Relations | **NPM**: Layer-2 topology information from network devices. **UDT**: Layer-2 topology information connecting generic nodes to network devices |
 
 #### Health
+
 The SolarWinds check retrieves the health status from nodes and interfaces and translates these statuses to StackState statuses:
 
 | Health status SolarWinds | Health status StackState |
@@ -58,3 +59,7 @@ The SolarWinds check retrieves the health status from nodes and interfaces and t
 #### Traces
 
 The SolarWinds check does not retrieve any trace data.
+
+### Component actions
+
+Links to SolarWinds detail dashboards are created as [component actions](https://l.stackstate.com/ui-solarwinds-component-actions) attached to SolarWinds components. This allows users to easily access more information from SolarWinds when needed.

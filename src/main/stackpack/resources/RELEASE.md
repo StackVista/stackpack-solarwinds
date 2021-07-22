@@ -1,4 +1,4 @@
-## Release notes
+# SolarWinds StackPack releases
 
 ## v1.0.0 (2021-07-22)
 

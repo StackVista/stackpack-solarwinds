@@ -1,18 +1,13 @@
-## The SolarWinds StackPack is waiting for your action, please send some topology to StackState
+## The StackState SolarWinds StackPack is waiting for data
 
-The StackPack has been installed.
+To begin collecting data from SolarWinds, add the following configuration to StackState Agent V2:
 
-Now, you can push data to this StackPack to check if it works.
-
-### Configure
-
-To enable the SolarWinds check and begin collecting data from SolarWinds, add the following configuration to StackState Agent V2:
-
-1.  Edit the Agent integration configuration file `/etc/stackstate-agent/conf.d/solarwinds.d/conf.yaml` to include details of your SolarWinds instance:
-    * **url** - the REST API URL, uses HTTPS protocol for communication.
+1. Edit the Agent integration configuration file `/etc/stackstate-agent/conf.d/solarwinds.d/conf.yaml` to include details of your SolarWinds instance and set the required filters:
+    * **url** - the REST API URL, uses HTTPS protocol for communication. This should be a hostname or IP, it should not include the prefix `https://`.
     * **user** - a SolarWinds user with access to the required SolarWinds API endpoints.
-    * **password** - use agent secrets management to store passwords outside the configuration file.
-
+    * **password** - password for the specified `user`. Use [secrets management](https://l.stackstate.com/ui-stackpack-secrets-management) to store passwords outside of the configuration file.
+    * **solarwinds_domain** - The name of a SolarWinds custom property that will be used to select nodes from SolarWinds to include in the StackState dataset.
+    * **solarwinds_domain_values** - A list of values used by the SolarWinds custom property specified in `solarwinds_domain`. Used to select the correct nodes for inclusion. Any node in SolarWinds that has one of these values set will be included in the data collection. Each value in this list will be represented as a separate domain in StackState.
     ```text
     init_config:
 
@@ -20,23 +15,17 @@ To enable the SolarWinds check and begin collecting data from SolarWinds, add th
       - url: <instance_name.solarwinds.localdomain>
         username: <instance_username>
         password: <instance_password>
-        solarwinds_domain: <instance_domain>
-        solarwinds_domain_values:
+        solarwinds_domain: <instance_domain>  # A SolarWinds custom property
+        solarwinds_domain_values:  # A list of values used by the solarwinds_domain
           - <instance_domain_value_1>
           - <instance_domain_value_2>
           - <instance_domain_value_n>
-        min_collection_interval: 30
+        # min_collection_interval: 30  # use in place of collection_interval for Agent v2.14.x or earlier
+        collection_interval: 30
      ```
-2. Set the following filters:
-    - **solarwinds_domain** - The name of a SolarWinds custom property that will be used to select nodes from SolarWinds to include in the StackState dataset.
-    - **solarwinds_domain_values** - A list of values used by the specified `solarwinds_domain` to select the correct nodes for inclusion. Any node in SolarWinds that has one of these values set will be included in the data collection. Each value in this list will be represented as a separate domain in StackState.
-3. Restart the StackState Agent(s) to apply the configuration changes.
-4. Once the Agent has restarted, wait for data to be collected from SolarWinds and sent to StackState.
+2. [Restart the StackState Agent\(s\)](https://l.stackstate.com/ui-stackpack-restart-agent) to apply the configuration changes.
+3. Once the Agent has restarted, wait for data to be collected from SolarWinds and sent to StackState.
 
-### Status
+### Troubleshooting
 
-To check the status of the SolarWinds integration, run the status subcommand and look for SolarWinds under `Running Checks`:
-
-```text
-sudo stackstate-agent status
-```
+Troubleshooting steps for any known issues can be found in the [StackState support knowledge base](https://l.stackstate.com/ui-solarwinds-support-kb).

@@ -1,14 +1,20 @@
 ## The StackState SolarWinds StackPack is installed
 
-Congratulations! The StackState SolarWinds StackPack is configured correctly. Data is received.
+Congratulations! The StackState SolarWinds StackPack is configured correctly. Data is being received.
 
 ### What's next?
 
-Now that StackState has the topology from your ServiceNow instance, you can see your topology in the SolarWinds view.
+Topology from SolarWinds can be found in the following view:
+
+* **SolarWinds - {{configurationConfig.solarwinds_instance_name}}**
+
+### Change the StackState Agent SolarWinds check configuration
+
+Refer to the StackState docs for details on [how to change configuration of the StackState Agent SolarWinds check](https://l.stackstate.com/ui-solarwinds-configure-check) that collects data from SolarWinds.
 
 ### Troubleshooting
 
-Troubleshooting steps for any known issues can be found in the [StackState support Knowledge base](https://l.stackstate.com/ui-servicenow-support-kb).
+Troubleshooting steps for any known issues can be found in the [StackState support Knowledge base](https://l.stackstate.com/ui-solarwinds-support-kb).
 
 ### Uninstall the SolarWinds StackPack
 

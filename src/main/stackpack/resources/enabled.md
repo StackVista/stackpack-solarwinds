@@ -4,7 +4,7 @@ Congratulations! The StackState SolarWinds StackPack is configured correctly. Da
 
 ### What's next?
 
-Topology from SolarWinds can be found in the following view:
+Topology from SolarWinds can be found in the following StackState view:
 
 * **SolarWinds - {{configurationConfig.solarwinds_instance_name}}**
 

@@ -10,7 +10,7 @@ Topology from SolarWinds can be found in the following StackState view:
 
 ### Change the StackState Agent SolarWinds check configuration
 
-Refer to the StackState docs for details on [how to change configuration of the StackState Agent SolarWinds check](https://l.stackstate.com/ui-solarwinds-configure-check) that collects data from SolarWinds.
+Refer to the StackState docs for details on how to [change configuration of the StackState Agent SolarWinds check](https://l.stackstate.com/ui-solarwinds-configure-check) that collects data from SolarWinds.
 
 ### Troubleshooting
 

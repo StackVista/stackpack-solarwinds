@@ -1,6 +1,6 @@
 # SolarWinds StackPack releases
 
-## v1.0.1 (tbd)
+## v1.0.1 (2022-09-27)
 
 **Improvements**
 - Updated documentation.
